@@ -8,7 +8,8 @@ const role = 'Engineer';
 
 describe('Character', () => {
   it('should create a character with a first name, last name, and role', () => {
-    const character = new Character(firstName, lastName, role);
+    const character = new Character(firstName, lastName, role, 1, () => 15);
+
     //  First testing way
     // expect(character.firstName).toBe(firstName);
     // expect(character.lastName).toBe(lastName);
@@ -32,6 +33,23 @@ describe('Character', () => {
       charisma: expect.any(Number),
       constitution: expect.any(Number),
       dexterity: expect.any(Number),
+      createdAt: expect.any(Date),
+      lastModified: expect.any(Date),
+    });
+
+    // Fourth way of testing - dependecy injection
+    expect(character).toEqual({
+      firstName,
+      lastName,
+      role,
+      wisdom: 15,
+      strength: 15,
+      level: 1,
+      intelligence: 15,
+      id: expect.stringContaining('person-'),
+      charisma: 15,
+      constitution: 15,
+      dexterity: 15,
       createdAt: expect.any(Date),
       lastModified: expect.any(Date),
     });
