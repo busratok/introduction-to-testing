@@ -7,9 +7,13 @@ const lastName = 'Doe';
 const role = 'Engineer';
 
 describe('Character', () => {
-  it('should create a character with a first name, last name, and role', () => {
-    const character = new Character(firstName, lastName, role, 1, () => 15);
+  let character;
 
+  beforeEach(() => {
+    character = new Character(firstName, lastName, role, 1, () => 15);
+  }); // You shouldn't use this all the time. If the code gets bigger it would be hard to detect where  the character is coming from  and if I wanted a test where it is a slightly different charcter I have to weirdly ovveride it
+
+  it('should create a character with a first name, last name, and role', () => {
     //  First testing way
     // expect(character.firstName).toBe(firstName);
     // expect(character.lastName).toBe(lastName);
@@ -56,7 +60,6 @@ describe('Character', () => {
   });
 
   it('should allow you to increase the level', () => {
-    const character = new Character(firstName, lastName, role);
     character.levelUp();
     expect(character.level).toBe(2);
 
@@ -68,7 +71,6 @@ describe('Character', () => {
   });
 
   it('should update the last modified date when leveling up', () => {
-    const character = new Character(firstName, lastName, role);
     const prevDate = character.lastModified;
     character.levelUp();
     expect(character.lastModified).not.toBe(prevDate);
